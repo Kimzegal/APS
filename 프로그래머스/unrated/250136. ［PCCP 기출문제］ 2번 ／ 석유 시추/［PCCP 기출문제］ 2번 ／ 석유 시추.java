@@ -42,6 +42,7 @@ class Solution {
         // 시작점을 방문처리하고 큐에 넣는다.
         int[] start = new int[] {r, c};
         visited[r][c] = true;
+        // 열 값을 set에 넣는다
         set.add(c);
         queue.offer(start);
         
@@ -54,7 +55,7 @@ class Solution {
                 if(!check(cur[0]+dr[i], cur[1]+dc[i], land)) continue;
                 // 방문한 적이 없고, 매장량이 0이 아니라면
                 if(!visited[cur[0]+dr[i]][cur[1]+dc[i]] && land[cur[0]+dr[i]][cur[1]+dc[i]] != 0){
-                    // 총 매장량을 더해주고, 방문처리를 해준 뒤 큐에 넣어준다.
+                    // 총 매장량을 더해주고, 방문처리를 해준 뒤 큐에 넣어준다. 열값도 set에 넣는다.
                     total++;
                     set.add(cur[1]+dc[i]);
                     visited[cur[0]+dr[i]][cur[1]+dc[i]] = true;
