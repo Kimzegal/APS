@@ -1,23 +1,28 @@
-import java.util.*;
-import java.io.*;
-
 /*
- * 빠른 입출력을 받는 버전
+ * 정렬을 하지 않는 방법
  */
 public class Main {
     public static void main(String[] args) throws Exception{
 
         int N = read();
-        int[] arr = new int[N];
-        int ans = 0;
+        int[] cnt = new int[100001];
+        int sum = 0; // 누적값
 
         for(int i = 0; i < N; i++){
-            arr[i] = read();
+            cnt[read()]++;
         }
 
-        Arrays.sort(arr); // 정렬
+        for(int i = 0; i < 100001; i++){
+            if(cnt[i] == 0) continue; // 해당하는 수가 없으면 스킵
 
-        System.out.println(arr[(N-1)/2]); // 중앙값 출력
+            sum += cnt[i]; // 갯수만큼 더해준다
+
+            if(sum >= (N+1)/2) { // 5개면 3번째, 6개면 3~4 ... 따라서 +1후 /2
+
+                System.out.println(i);
+                return;
+            }
+        }
     }
 
     public static int read() throws Exception{
