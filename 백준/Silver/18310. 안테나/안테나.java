@@ -1,15 +1,20 @@
 import java.util.*;
+import java.io.*;
 
+/*
+ * BufferedReader를 사용한 버전
+ */
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = sc.nextInt(); // 집의 갯수
-        int[] arr = new int[N]; // 집의 위치
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
         int ans = 0;
 
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i = 0; i < N; i++){
-            arr[i] = sc.nextInt();
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
         Arrays.sort(arr); // 정렬
