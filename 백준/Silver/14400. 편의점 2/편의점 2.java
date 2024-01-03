@@ -1,26 +1,22 @@
 
 import java.util.*;
-import java.io.*;
 
 /*
- * BufferedReader 사용
+ * 빠른 입출력 사용
  */
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
 
         long sum = 0;
 
-        int n = Integer.parseInt(br.readLine().trim());
+        int n = read();
         int[] x = new int[n];
         int[] y = new int[n];
 
         for(int i = 0; i < n; i++){
-            st = new StringTokenizer(br.readLine());
-            x[i] = Integer.parseInt(st.nextToken());
-            y[i] = Integer.parseInt(st.nextToken());
+            x[i] = read();
+            y[i] = read();
         }
 
         Arrays.sort(x);
@@ -34,5 +30,25 @@ public class Main {
             sum += (curX + curY);
         }
         System.out.println(sum);
+    }
+
+    public static int read() throws Exception{
+        int n = 0;
+        boolean isNumber = false;
+        boolean minus = false;
+        while(true){
+            int cur = System.in.read();
+            if(cur == '-') minus = true;
+            else if(cur <= 32){
+                if(isNumber){
+                    if(minus) return -n;
+                    else return n;
+                }
+            }
+            else{
+                isNumber = true;
+                n = (n<<3) + (n<<1) + (cur&15);
+            }
+        }
     }
 }
