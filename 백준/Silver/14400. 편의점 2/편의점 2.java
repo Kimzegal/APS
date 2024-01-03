@@ -1,21 +1,26 @@
+
 import java.util.*;
+import java.io.*;
 
 /*
- * Scanner 사용
+ * BufferedReader 사용
  */
 public class Main {
-    public static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
         long sum = 0;
 
-        int n = sc.nextInt();
+        int n = Integer.parseInt(br.readLine().trim());
         int[] x = new int[n];
         int[] y = new int[n];
 
         for(int i = 0; i < n; i++){
-            x[i] = sc.nextInt();
-            y[i] = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            x[i] = Integer.parseInt(st.nextToken());
+            y[i] = Integer.parseInt(st.nextToken());
         }
 
         Arrays.sort(x);
