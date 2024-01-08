@@ -1,20 +1,41 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
 
+/*
+ * 두번째 아이디어 : 덜 돌린다
+ */
 public class Main {
-	public static void main(String args[]) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		
-		int A = Integer.parseInt(st.nextToken());
-		int B = Integer.parseInt(st.nextToken());
-		
-		for(int i = -1000; i <= 1000; i++) {
-			int cur = i*i + 2*i*A + B;
-			if(cur == 0){
-				System.out.print(i+" ");
-			}
-		}
-	}
+
+    public static void main(String[] args) throws Exception {
+
+        int A = read();
+        int B = read();
+        int ans = 0;
+        for(int i = -1000; i < 1001; i++){
+            if(i*i + 2*A*i + B == 0){
+                System.out.print(i+" ");
+                if(++ans == 2) return;
+            }
+        }
+    }
+    public static int read() throws Exception{
+        int n = 0;
+        boolean isNumber = false;
+        boolean isNegative = false;
+        while(true){
+            int cur = System.in.read();
+            if(cur == '-'){
+                isNegative = true;
+            }
+            else if(cur <= 32){
+                if(isNumber){
+                    if(isNegative) return ~n+1;
+                    else return n;
+                }
+            }
+            else{
+                isNumber = true;
+                n = (n<<3) + (n<<1) + (cur&15);
+            }
+        }
+    }
 }
