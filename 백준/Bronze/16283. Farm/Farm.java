@@ -1,5 +1,5 @@
 /*
- * 첫번째 아이디어 : 냅다 돌리기
+ * 세번째 아이디어 : 반복문 최적화
  */
 public class Main {
 
@@ -10,41 +10,28 @@ public class Main {
         int n = read();
         int w = read();
 
-        int ans1 = -1;
-        int ans2 = -1;
+        int cnt = 0;
+        int ans = -1;
 
-        for(int i = 1; i <= n; i++){
-            for(int j = 1; j <= n; j++){
-                if(a*i + b*j == w && i+j == n) {
-                    if(ans1 != -1) {
-                        System.out.println(-1);
-                        return;
-                    }
-                    else{
-                        ans1 = i;
-                        ans2 = j;
-                    }
-                }
+        for(int i = 1; i < n; i++){
+            if(a*i + b*(n-i) == w) {
+                ans = i;
+                cnt++;
             }
         }
 
-        if(ans1 == -1) System.out.println(-1);
-
-        else System.out.println(ans1 + " " + ans2);
+        if(cnt != 1) System.out.println(-1);
+        else System.out.println(ans + " " + (n-ans));
     }
     public static int read() throws Exception{
         int n = 0;
+        int cur = 0;
         boolean isNumber = false;
-        boolean isNegative = false;
         while(true){
-            int cur = System.in.read();
-            if(cur == '-'){
-                isNegative = true;
-            }
-            else if(cur <= 32){
+            cur = System.in.read();
+            if(cur <= 32){
                 if(isNumber){
-                    if(isNegative) return ~n+1;
-                    else return n;
+                    return n;
                 }
             }
             else{
