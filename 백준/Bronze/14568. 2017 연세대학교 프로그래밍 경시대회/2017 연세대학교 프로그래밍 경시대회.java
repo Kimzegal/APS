@@ -9,12 +9,9 @@ public class Main {
         int cnt = 0;
 
         for (int i = 1; i < N; i++) {
-            for (int j = 1; j < N; j++) {
-                for (int k = 1; k < N; k++) {
-                    if (i + j + k == N && k >= j + 2 && i % 2 == 0) {
-                        cnt++;
-                    }
-                }
+            for (int j = i+2; j < N - i - 1; j++) {
+                int a = N-(i+j);
+                if(a > 0 && a%2 == 0) cnt ++;
             }
         }
 
