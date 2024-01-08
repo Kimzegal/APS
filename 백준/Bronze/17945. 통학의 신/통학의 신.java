@@ -9,11 +9,9 @@ public class Main {
 
         int A = read();
         int B = read();
-        int ans = 0;
         for(int i = -1000; i < 1001; i++){
             if(i*i + 2*A*i + B == 0){
                 System.out.print(i+" ");
-                if(++ans == 2) return;
             }
         }
     }
