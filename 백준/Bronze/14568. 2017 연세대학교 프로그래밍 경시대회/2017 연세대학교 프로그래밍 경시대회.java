@@ -1,5 +1,5 @@
 /*
- * 첫번째 아이디어 : 냅다 돌리기
+ * 두번째 아이디어 : 반복문 최적화
  */
 public class Main {
 
@@ -8,10 +8,9 @@ public class Main {
         int N = read();
         int cnt = 0;
 
-        for (int i = 1; i < N; i++) {
-            for (int j = i+2; j < N - i - 1; j++) {
-                int a = N-(i+j);
-                if(a > 0 && a%2 == 0) cnt ++;
+        for (int i = 2; i < N; i+=2) {
+            for (int j = 3; j < N-i; j++) {
+                if(N-(i+j) <= j - 2) cnt++;
             }
         }
 
