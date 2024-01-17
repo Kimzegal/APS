@@ -2,47 +2,29 @@ import java.util.*;
 import java.io.*;
 
 /*
- * 두번째 아이디어 : 범위가 작으므로 카운트배열을 사용해서 정열을 하지 않는다.
+ * 세번째 아이디어 : 카운트배열로 바로 이용한다.
  */
 public class Main {
 
     public static void main(String[] args) throws Exception {
        int n = read();
-       boolean[] cnt = new boolean[1000002];
+       int[] arr = new int[n];
+       boolean[] cnt = new boolean[1000001];
        int ans = 0;
 
        for(int i = 0; i < n ; i++){
-           cnt[read()] = true;
+           int now = read();
+           cnt[now] = true;
+           arr[i] = now;
        }
-       cnt[0] = true;
-       cnt[1000001] = true;
-
        int x = read();
-       int s = 1;
-       int e = 1000000;
-       while(!cnt[s]) s++;
 
-       while(!cnt[e]) e--;
-
-       while(s < e){
-           if(s + e > x){
-               e--;
-               while(!cnt[e]) e--;
-           }
-           else if(s + e < x){
-               s++;
-               while(!cnt[s]) s++;
-           }
-           else{
-               ans++;
-               s++;
-               e--;
-               while(!cnt[s]) s++;
-               while(!cnt[e]) e--;
-           }
+       for(int i = 0; i < n; i++){
+           int idx = x - arr[i];
+           if(idx > 0 && idx <= 1000000 && cnt[idx]) ans++;
        }
 
-       System.out.println(ans);
+       System.out.println(ans/2);
     }
     public static int read() throws Exception{
         int n = 0;
