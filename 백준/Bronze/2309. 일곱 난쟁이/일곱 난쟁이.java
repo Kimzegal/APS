@@ -1,49 +1,54 @@
 import java.util.*;
+import java.io.*;
 
 /*
- * 첫 아이디어 : 좌우의 갯수로 판단해봅시다.
+ * 첫번째 아이디어 : 인치웜처럼 가서 K만큼 없앴을때 갈수 있는 최대 길이 재기
  */
 public class Main {
-
     public static void main(String[] args) throws Exception {
-
         int[] arr = new int[9];
-        int sum = 0;
-        for (int i = 0; i < 9; i++) {
+        int total = 0;
+        for(int i = 0; i < 9; i++){
             arr[i] = read();
-            sum += arr[i];
+            total += arr[i];
         }
 
+        total -= 100;
         Arrays.sort(arr);
 
-        int a = -1;
-        int b = -1;
-
-        label:
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (i == j) continue;
-                if (sum - arr[i] - arr[j] == 100) {
-                    a = i;
-                    b = j;
-                    break label;
-                }
-            }
+        int s = 0;
+        int e = 8;
+        while(s < e){
+           if(arr[s] + arr[e] == total){
+               break;
+           }
+           else if(arr[s] + arr[e] > total){
+               e--;
+           }
+           else{
+               s++;
+           }
         }
 
-        for (int i = 0; i < 9; i++) {
-            if (i == a || i == b) continue;
+        for(int i = 0; i < 9; i++){
+            if(i == s || i == e) continue;
             System.out.println(arr[i]);
         }
     }
+
     public static int read() throws Exception{
         int n = 0;
+        int cur;
         boolean isNumber = false;
+        boolean isNegative = false;
         while(true){
-            int cur = System.in.read();
-            if(cur <= 32){
+            cur = System.in.read();
+            if(cur == '-'){
+                isNegative = true;
+            }
+            else if(cur <= 32){
                 if(isNumber){
-                    return n;
+                    return isNegative ? -n : n;
                 }
             }
             else{
