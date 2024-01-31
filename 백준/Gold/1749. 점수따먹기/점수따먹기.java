@@ -10,18 +10,11 @@ public class Main {
         int N = read();
         int M = read();
         int[][] arr = new int[N+1][M+1];
-
+        int max = Integer.MIN_VALUE;
         for(int i = 1; i <= N; i++){
             for(int j = 1; j <= M; j++){
-                arr[i][j] = read();
-                arr[i][j] = arr[i][j] + arr[i][j-1] + arr[i-1][j] - arr[i-1][j-1];
-            }
-        }
-
-        long max = Integer.MIN_VALUE;
-
-        for(int i = 1; i <= N; i++){
-            for(int j = 1; j <= M; j++){
+                int now = read();
+                arr[i][j] = now + arr[i][j-1] + arr[i-1][j] - arr[i-1][j-1];
                 for(int a = 0; a < i; a++){
                     for(int b = 0; b < j; b++){
                         max = Math.max(max, arr[i][j] - arr[a][j] - arr[i][b] + arr[a][b]);
