@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 /*
-    누적합을 배열을 구한뒤에, 앞에서부터 차근차근 세어나가보자.
+    누적합 배열
  */
 public class Main {
     public static int N,M;
