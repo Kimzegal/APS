@@ -1,39 +1,61 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.*;
 
+/*
+    기본적인 백트래킹
+ */
 public class Main {
-	
-	public static int N, M;
-	public static int[] answer;
-	public static StringBuilder sb = new StringBuilder();
-	
-	public static void main(String args[]) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-		answer = new int[M];
-		
-		combination(0,0);
-		
-		System.out.println(sb.toString());
+    public static int N,M;
+    public static StringBuilder sb = new StringBuilder();
+    public static int[] arr;
+    public static void main(String[] args) throws Exception {
+        N = read(); // 자연수
+        M = read(); // 중복없이 고르는 수
+        arr = new int[M]; // 수 저장
 
-	}
-	
-	public static void combination(int depth, int start) {
-		if(depth == M) {
-			for(int num : answer) {
-				sb.append(num).append(' ');
-			}
-			sb.append('\n');
-		}
-		
-		else {
-			for(int i = start; i < N; i++) {
-				answer[depth] = i+1;
-				combination(depth+1, i+1);
-			}
-		}
-	}
+        combination(1,0);
+
+        System.out.println(sb);
+    }
+
+    public static void combination(int now, int depth){
+        if(depth == M){
+            for(int i = 0; i < M; i++){
+                sb.append(arr[i]).append(" ");
+            }
+            sb.append("\n"); // 개행
+            return;
+        }
+
+        else{
+            for(int i = now; i <= N; i++){
+                arr[depth] = i;
+                combination(i+1,depth + 1);
+            }
+        }
+    }
+
+
+    public static int read() throws Exception{
+        int n = 0;
+        int cur;
+        boolean isNumber = false;
+        boolean isNegative = false;
+        while(true){
+            cur = System.in.read();
+            if(cur == '-'){
+                isNegative = true;
+            }
+            else if(cur <= 32){
+                if(isNumber){
+                    return isNegative ? -n : n;
+                }
+            }
+            else{
+                isNumber = true;
+                n = (n<<3) + (n<<1) + (cur&15);
+            }
+        }
+    }
+
 }
