@@ -27,19 +27,22 @@ public class Main {
 
         int[] dp = new int[k+1];
 
+        for(int i = 1; i <= k; i++){
+            dp[i] = 10001;
+        }
+
         // dp 수행을 모든 가치값에서 수행
         for(int i = 0; i < k; i++) {
             // 값 비교 및 최신화를 모든 동전 묶음에서 실행
             for(int j = 0; j < idx; j++){
-                // 처음 뺴고 dp가 바뀌지 않았으면 제외
-                if(i != 0 && dp[i] == 0) continue;
                 // 배열의 범위를 초과하지 않는선에서, dp가 바뀌지 않았거나 동전갯수가 현재가 더작은경우
-                if(i + coin[j] <= k && (dp[i+coin[j]] == 0 || dp[i] + 1 < dp[i+coin[j]])){
+                if(i + coin[j] <= k && dp[i] + 1 < dp[i+coin[j]]){
                     dp[i+coin[j]] = dp[i] + 1;
                 }
             }
         }
-        if(dp[k] == 0) System.out.println(-1);
+
+        if(dp[k] == 10001) System.out.println(-1);
         else System.out.println(dp[k]);
 
     }
