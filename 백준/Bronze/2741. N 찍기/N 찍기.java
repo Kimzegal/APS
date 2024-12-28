@@ -9,7 +9,7 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
 
         for(int i = 1; i <= N; i++){
-            sb.append(i+"\n");
+            sb.append(i).append('\n');
         }
 
         System.out.println(sb);
